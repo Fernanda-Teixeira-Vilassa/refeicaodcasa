@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refeição da Casa</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Refeição da Casa</h1>
+        <h2>Menu do Dia</h2>
+        <!-- Adicione aqui o menu do dia -->
+    </header>
+
+    <main>
+        <section id="pedido">
+            <h2>Faça Seu Pedido</h2>
+            <form id="pedido-form">
+                <label for="tamanho">Tamanho da Refeição:</label>
+                <select id="tamanho" name="tamanho" required>
+                    <option value="">Selecione</option>
+                    <option value="p">Pequeno (R$15,00)</option>
+                    <option value="m">Médio (R$18,00)</option>
+                    <option value="g">Grande (R$21,00)</option>
+                </select>
+
+                <fieldset>
+                    <legend>Garnissões:</legend>
+                    <label><input type="checkbox" name="guarnicao" value="Arroz branco"> Arroz branco</label>
+                    <label><input type="checkbox" name="guarnicao" value="Feijão Caldo"> Feijão Caldo</label>
+                    <label><input type="checkbox" name="guarnicao" value="Tutu Mineiro"> Tutu Mineiro</label>
+                    <label><input type="checkbox" name="guarnicao" value="Macarrão"> Macarrão</label>
+                    <label><input type="checkbox" name="guarnicao" value="Farofa"> Farofa</label>
+                    <label><input type="checkbox" name="guarnicao" value="Polenta"> Polenta</label>
+                    <label><input type="checkbox" name="guarnicao" value="Grão de Bico Refogado"> Grão de Bico Refogado</label>
+                    <label><input type="checkbox" name="guarnicao" value="Batata Frita"> Batata Frita</label>
+                    <label><input type="checkbox" name="guarnicao" value="Acelga com Molho"> Acelga com Molho</label>
+                    <label><input type="checkbox" name="guarnicao" value="Alface"> Alface</label>
+                    <label><input type="checkbox" name="guarnicao" value="Vinagrete"> Vinagrete</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Carne:</legend>
+                    <label><input type="radio" name="carne" value="Omelete com Queijo e carne" required> Omelete com Queijo e carne</label>
+                    <label><input type="radio" name="carne" value="Pernil Assado com barbecue"> Pernil Assado com barbecue</label>
+                    <label><input type="radio" name="carne" value="Dobradinha com bacon e linguiça"> Dobradinha com bacon e linguiça</label>
+                    <label><input type="radio" name="carne" value="Coxa de Frango Assado + ovo Frito"> Coxa de Frango Assado + ovo Frito</label>
+                    <label><input type="radio" name="carne" value="Isca de Boi Acebolado com linguiça e bacon"> Isca de Boi Acebolado com linguiça e bacon</label>
+                    <label><input type="radio" name="carne" value="Strogonoff de Frango com Batata Palha"> Strogonoff de Frango com Batata Palha</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Outra Carne (R$6,00 cada):</legend>
+                    <label><input type="checkbox" name="outra-carne" value="Omelete com Queijo e carne"> Omelete com Queijo e carne</label>
+                    <label><input type="checkbox" name="outra-carne" value="Pernil Assado com barbecue"> Pernil Assado com barbecue</label>
+                    <label><input type="checkbox" name="outra-carne" value="Dobradinha com bacon e linguiça"> Dobradinha com bacon e linguiça</label>
+                    <label><input type="checkbox" name="outra-carne" value="Coxa de Frango Assado + ovo Frito"> Coxa de Frango Assado + ovo Frito</label>
+                    <label><input type="checkbox" name="outra-carne" value="Isca de Boi Acebolado com linguiça e bacon"> Isca de Boi Acebolado com linguiça e bacon</label>
+                    <label><input type="checkbox" name="outra-carne" value="Strogonoff de Frango com Batata Palha"> Strogonoff de Frango com Batata Palha</label>
+                </fieldset>
+
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" name="observacoes" rows="4" placeholder="Escreva suas observações aqui"></textarea>
+
+                <button type="button" id="adicionar-refeicao">Adicionar Refeição</button>
+            </form>
+            
+            <ul id="lista-refeicoes"></ul>
+
+            <div id="total">Total: R$0,00</div>
+
+            <!-- Formulário de pagamento e informações do cliente -->
+            <form id="pedido-completo-form">
+                <section id="forma-pagamento">
+                    <h2>Forma de Pagamento</h2>
+                    <label>
+                        Forma de Pagamento:
+                        <select id="forma-pagamento" name="forma-pagamento" required>
+                            <option value="">Selecione</option>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="pix">Pix</option>
+                            <option value="picpay">Picpay</option>
+                        </select>
+                    </label>
+                    <div id="dinheiro-info" style="display:none;">
+                        <label>
+                            Valor Pago:
+                            <input type="number" id="valor-pago" name="valor-pago" placeholder="Digite o valor pago" step="0.01">
+                        </label>
+                        <div id="troco-info">Troco: R$0,00</div>
+                    </div>
+                    <div id="pix-info" style="display:none;">
+                        <p>Chave Pix: 2799799-0191 ou 2799714-9533</p>
+                    </div>
+                    <div id="picpay-info" style="display:none;">
+                        <p>Picpay: @refeicaodcasa</p>
+                    </div>
+                </section>
+
+                <section id="informacoes-cliente">
+                    <h2>Informações do Cliente</h2>
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" id="telefone" name="telefone" required>
+
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" id="endereco" name="endereco" placeholder="Rua/Avenida" required>
+                    <input type="number" id="numero" name="numero" placeholder="Número" required>
+                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
+                    <input type="text" id="complemento" name="complemento" placeholder="Complemento">
+                    <input type="text" id="ponto-referencia" name="ponto-referencia" placeholder="Ponto de Referência">
+                </section>
+
+                <button type="submit" id="enviar-pedido">Enviar Pedido</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
