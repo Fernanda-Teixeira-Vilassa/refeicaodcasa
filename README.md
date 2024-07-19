@@ -24,11 +24,3 @@ Bem-vindo ao projeto **Refeição D Casa**! Este é um sistema de pedidos de ref
 
 - Node.js (versão 14 ou superior)
 - NPM (Node Package Manager)
-
-### Passos para Configuração
-
-1. **Clone o repositório**
-
-   ```bash
-   git clone https://github.com/seu-usuario/refeicao-d-casa.git
-   cd refeicao-d-casa
