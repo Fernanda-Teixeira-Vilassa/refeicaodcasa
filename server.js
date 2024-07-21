@@ -1,48 +1,51 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static('public'));
 
-// Rota para o formulário de informações do cliente
-app.post('/informacoes-cliente', (req, res) => {
-    const { nome, telefone, rua, numero, bairro, complemento, ponto_referencia } = req.body;
-    console.log(`Informações do Cliente:
-        Nome: ${nome}
-        Telefone: ${telefone}
-        Rua: ${rua}
-        Número: ${numero}
-        Bairro: ${bairro}
-        Complemento: ${complemento}
-        Ponto de Referência: ${ponto_referencia}`);
-    res.send('Informações do cliente recebidas com sucesso!');
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Rota para o formulário de pedido
 app.post('/pedido', (req, res) => {
-    const { tamanho, guarnicoes, carne, outrasCarnes, observacoes } = req.body;
-    console.log(`Pedido:
-        Tamanho: ${tamanho}
-        Guarnições: ${guarnicoes}
-        Carne: ${carne}
-        Outras Carnes: ${outrasCarnes}
-        Observações: ${observacoes}`);
-    res.send('Pedido recebido com sucesso!');
+    const {
+        nome,
+        telefone,
+        endereco,
+        numero,
+        bairro,
+        complemento,
+        pontoReferencia,
+        formaPagamento,
+        valorPago,
+        refeicoes,
+        tipoEntrega,
+        hora
+    } = req.body;
+
+    const taxaEntrega = tipoEntrega === 'entrega' ? 4.00 : 0;
+    const total = refeicoes.reduce((acc, refeicao) => acc + refeicao.preco, 0) + taxaEntrega;
+
+    let mensagem = `Pedido:\n\n${refeicoes.map(r => `Tamanho: ${r.tamanho} | Preço: R$${r.preco.toFixed(2)} | Guarnições: ${r.guarnicoes.join(', ')} | Carne: ${r.carne} | Outras Carnes: ${r.outrasCarnes.join(', ')} | Observações: ${r.observacoes}`).join('\n')}\n\nTotal: R$${total.toFixed(2)}\n\nCliente:\nNome: ${nome}\nTelefone: ${telefone}\nEndereço: ${endereco} ${numero}, ${bairro.join(', ')} ${complemento} - ${pontoReferencia}\n\nForma de Pagamento:\n${formaPagamento}\nValor Pago: R$${valorPago}`;
+
+    if (formaPagamento === 'pix' || formaPagamento === 'picpay') {
+        mensagem += `\n\n*Entrega com pagamento em pix ou picpay, só será montada e entregue após o envio do pagamento*`;
+    }
+
+    const mensagemCodificada = encodeURIComponent(mensagem);
+    const numeroWhatsApp = '5527997149533';
+    const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
+
+    res.json({ linkWhatsApp });
 });
 
-// Rota para o formulário de pagamento
-app.post('/forma-pagamento', (req, res) => {
-    const { pagamento, troco } = req.body;
-    console.log(`Forma de Pagamento:
-        Pagamento: ${pagamento}
-        Troco: ${troco}`);
-    res.send('Pedido recebido com sucesso!');
-});
-
-// Iniciar o servidor
-app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
 });

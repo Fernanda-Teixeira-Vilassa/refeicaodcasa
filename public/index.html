@@ -26,7 +26,7 @@
                 </select>
 
                 <fieldset>
-                    <legend>Garnissões:</legend>
+                    <legend>Guarnições:</legend>
                     <label><input type="checkbox" name="guarnicao" value="Arroz branco"> Arroz branco</label>
                     <label><input type="checkbox" name="guarnicao" value="Feijão Caldo"> Feijão Caldo</label>
                     <label><input type="checkbox" name="guarnicao" value="Tutu Mineiro"> Tutu Mineiro</label>
@@ -42,16 +42,16 @@
 
                 <fieldset>
                     <legend>Carne:</legend>
-                    <label><input type="radio" name="carne" value="Omelete com Queijo e carne" required> Omelete com Queijo e carne</label>
-                    <label><input type="radio" name="carne" value="Pernil Assado com barbecue"> Pernil Assado com barbecue</label>
-                    <label><input type="radio" name="carne" value="Dobradinha com bacon e linguiça"> Dobradinha com bacon e linguiça</label>
-                    <label><input type="radio" name="carne" value="Coxa de Frango Assado + ovo Frito"> Coxa de Frango Assado + ovo Frito</label>
-                    <label><input type="radio" name="carne" value="Isca de Boi Acebolado com linguiça e bacon"> Isca de Boi Acebolado com linguiça e bacon</label>
-                    <label><input type="radio" name="carne" value="Strogonoff de Frango com Batata Palha"> Strogonoff de Frango com Batata Palha</label>
+                    <label><input type="checkbox" name="carne" value="Omelete com Queijo e carne" required> Omelete com Queijo e carne</label>
+                    <label><input type="checkbox" name="carne" value="Pernil Assado com barbecue"> Pernil Assado com barbecue</label>
+                    <label><input type="checkbox" name="carne" value="Dobradinha com bacon e linguiça"> Dobradinha com bacon e linguiça</label>
+                    <label><input type="checkbox" name="carne" value="Coxa de Frango Assado + ovo Frito"> Coxa de Frango Assado + ovo Frito</label>
+                    <label><input type="checkbox" name="carne" value="Isca de Boi Acebolado com linguiça e bacon"> Isca de Boi Acebolado com linguiça e bacon</label>
+                    <label><input type="checkbox" name="carne" value="Strogonoff de Frango com Batata Palha"> Strogonoff de Frango com Batata Palha</label>
                 </fieldset>
 
                 <fieldset>
-                    <legend>Outra Carne (R$6,00 cada):</legend>
+                    <legend>Outra Carne (R$4,00 cada):</legend>
                     <label><input type="checkbox" name="outra-carne" value="Omelete com Queijo e carne"> Omelete com Queijo e carne</label>
                     <label><input type="checkbox" name="outra-carne" value="Pernil Assado com barbecue"> Pernil Assado com barbecue</label>
                     <label><input type="checkbox" name="outra-carne" value="Dobradinha com bacon e linguiça"> Dobradinha com bacon e linguiça</label>
@@ -67,16 +67,28 @@
             </form>
             
             <ul id="lista-refeicoes"></ul>
+            
+            <fieldset>
+                <legend>Entrega ou Retirada:</legend>
+                <label><input type="radio" name="entrega-retirada" value="entrega" required> Entrega (R$4,00)</label>
+                <label><input type="radio" name="entrega-retirada" value="retirada"> Retirada</label>
+            </fieldset>
 
+            <fieldset id="horario" style="display: none;">
+                <legend>Horário de Entrega</legend>
+                <label for="hora">Selecione o horário:</label>
+                <input type="time" id="hora" name="hora">
+            </fieldset>
+            
+            
             <div id="total">Total: R$0,00</div>
 
-            <!-- Formulário de pagamento e informações do cliente -->
             <form id="pedido-completo-form">
                 <section id="forma-pagamento">
                     <h2>Forma de Pagamento</h2>
-                    <label>
+                    <label for="forma-pagamento-select">
                         Forma de Pagamento:
-                        <select id="forma-pagamento" name="forma-pagamento" required>
+                        <select id="forma-pagamento-select" name="forma-pagamento" required>
                             <option value="">Selecione</option>
                             <option value="dinheiro">Dinheiro</option>
                             <option value="pix">Pix</option>
@@ -84,7 +96,7 @@
                         </select>
                     </label>
                     <div id="dinheiro-info" style="display:none;">
-                        <label>
+                        <label for="valor-pago">
                             Valor Pago:
                             <input type="number" id="valor-pago" name="valor-pago" placeholder="Digite o valor pago" step="0.01">
                         </label>
@@ -92,9 +104,11 @@
                     </div>
                     <div id="pix-info" style="display:none;">
                         <p>Chave Pix: 2799799-0191 ou 2799714-9533</p>
+                        <p>Entrega com pagamento em PIX, só será montada e entregue após o envio do pagamento para o whatsapp 2799714-9533</p>
                     </div>
                     <div id="picpay-info" style="display:none;">
                         <p>Picpay: @refeicaodcasa</p>
+                        <p>Entrega com pagamento em PICPAY, só será montada e entregue após o envio do pagamento para o whatsapp 2799714-9533</p>
                     </div>
                 </section>
 
@@ -109,7 +123,16 @@
                     <label for="endereco">Endereço:</label>
                     <input type="text" id="endereco" name="endereco" placeholder="Rua/Avenida" required>
                     <input type="number" id="numero" name="numero" placeholder="Número" required>
-                    <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
+                    <fieldset>
+                        <legend>Bairros atendidos pela loja:</legend>
+                        <label><input type="checkbox" name="bairro" value="Parque das Gaivotas"> Parque das Gaivotas</label>
+                        <label><input type="checkbox" name="bairro" value="Nova Itaparica"> Nova Itaparica</label>
+                        <label><input type="checkbox" name="bairro" value="Ilha dos Bentos"> Ilha dos Bentos</label>
+                        <label><input type="checkbox" name="bairro" value="Novo Mexico"> Novo Mexico</label>
+                        <label><input type="checkbox" name="bairro" value="Itaparica"> Itaparica</label>
+                        <label><input type="checkbox" name="bairro" value="Guaranhus"> Guaranhus</label>
+                        <label><input type="checkbox" name="bairro" value="Jd. Guaranhus"> Jd. Guaranhus</label>
+                    </fieldset>
                     <input type="text" id="complemento" name="complemento" placeholder="Complemento">
                     <input type="text" id="ponto-referencia" name="ponto-referencia" placeholder="Ponto de Referência">
                 </section>
