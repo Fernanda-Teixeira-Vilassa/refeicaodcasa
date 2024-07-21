@@ -1,26 +1,27 @@
 # Refeição D Casa
 
-Bem-vindo ao projeto **Refeição D Casa**! Este é um sistema de pedidos de refeições online com uma interface simples e funcional. 
+## Repositório de Pedido de Refeição
 
-## Estrutura do Projeto
+Este repositório contém um sistema para pedidos de refeição com opções de entrega e retirada. O projeto inclui funcionalidades para:
 
-- **public/**
-  - `index.html` - Página principal do site com o formulário para pedidos e informações do cliente.
-  - `styles.css` - Arquivo de estilos para uma aparência alegre e moderna.
-  - `scripts.js` - JavaScript para lógica de adição de refeições, cálculo de total e gerenciamento de forma de pagamento.
-- **server.js** - Código do servidor utilizando Express para gerenciar requisições e dados do cliente.
-- **package.json** - Arquivo de configuração do Node.js com dependências do projeto.
+- **Escolha de Refeições:** Selecione o tamanho da refeição, carne, guarnições e adicione observações.
+- **Formulário de Pedido:** Complete informações de cliente e pagamento.
+- **Validações:** Verifica se o número de guarnições é suficiente e se o horário de entrega está dentro do intervalo permitido.
+- **Pagamento:** Suporte para pagamento em dinheiro, pix e picpay, com regras específicas para cada método.
+- **Resumo do Pedido:** Gera uma mensagem formatada para envio via WhatsApp com todos os detalhes do pedido.
 
 ## Funcionalidades
 
-1. **Menu do Dia**: Exibe a descrição do menu atual.
-2. **Informações do Cliente**: Formulário para coletar informações como nome, telefone, e endereço.
-3. **Pedido**: Permite selecionar o tamanho da refeição e adicionar ao pedido, com cálculo automático do total.
-4. **Forma de Pagamento**: Escolha entre Dinheiro, Pix ou Picpay e forneça informações adicionais, como necessidade de troco ou chaves de pagamento.
+- **Formulário Dinâmico:** Atualiza o total do pedido e valida o horário de entrega.
+- **Validação de Guarnições:** Requer pelo menos 5 guarnições para o pedido.
+- **Taxa de Entrega:** Aplica uma taxa de R$4,00 para entregas.
+- **Hora de Entrega:** Limita o horário de entrega entre 11h e 14h e pelo menos 30 minutos à frente.
+- **Mensagens de Pagamento:** Inclui informações adicionais para pagamentos via pix e picpay.
 
-## Instruções de Configuração
+## Tecnologias Utilizadas
 
-### Pré-requisitos
+- HTML
+- CSS
+- JavaScript
+- Git & GitHub
 
-- Node.js (versão 14 ou superior)
-- NPM (Node Package Manager)
